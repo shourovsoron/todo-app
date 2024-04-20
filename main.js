@@ -8,6 +8,9 @@ let completeUl = document.querySelector('.complete-list ul'); // Get complete UL
 let createTask =function(taskname){
     let listItem = document.createElement("li")
     let label = document.createElement("label");
+    let EditBtn = document.createElement("span");
+    EditBtn.classList="editIcon"
+    EditBtn.innerHTML=`<i class="fa-regular fa-pen-to-square"></i>`;
     let checkBox = document.createElement('input');
   
 
@@ -17,6 +20,7 @@ let createTask =function(taskname){
 
     listItem.appendChild(checkBox);
     listItem.appendChild(label);
+    listItem.appendChild(EditBtn);
 
     return listItem;
 }
@@ -26,15 +30,17 @@ let addtask= function(){
     let listItem = createTask(newTask.value);
     IncompleteUl.appendChild(listItem);
     newTask.value="";
-    InCompleteItemsBind(listItem);
+    InCompleteItemsBind(listItem );
 }
 
 
 let InCompleteItemsBind = function(listItem){
-    let checkBox = listItem.querySelector('input[type="checkbox"]')
+    let checkBox = listItem.querySelector('input[type="checkbox"]');
+    let EditBtn = listItem.querySelector(".editIcon");
     // checkBox.onchange = completeTask;
     // checkBox.addEventListener("change", completeTask);
     checkBox.setAttribute("onchange", "completeTask(this)");
+    EditBtn.onclick = EditFunction;
 }
 
 let completeTask = function(item){
@@ -61,6 +67,19 @@ let CompleteItemsBind = function(listItem){
 let deleteTask = function(){
     let listItem = this.parentNode;
     completeUl.removeChild(listItem);
+}
+
+let EditFunction = function(){
+
+    console.log("edit btn click Clicked");
+    let TaskLabel = this.previousElementSibling;
+    let TaskName = prompt("Please enter your Task Name", `${TaskLabel.innerText}`);
+
+    if (TaskName.length >= 1) {
+   
+    TaskLabel.innerHTML= TaskName;
+    }
+
 }
 
 for(let i=0; i < completeUl.children.length; i++){

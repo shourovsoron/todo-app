@@ -121,3 +121,13 @@ li {
   padding: 5px 10px;
   border-radius: 5px;
 }
+
+
+.editIcon{
+  margin-left: auto;
+  /* display: inline-block; */
+  float: right;
+  /* width: 20px; */
+  cursor: pointer;
+
+}
