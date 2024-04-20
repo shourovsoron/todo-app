@@ -47,9 +47,11 @@ let completeTask = function(item){
     let listItem = item.parentNode;
     console.log(listItem);
     let deletebtn = document.createElement("button");
+    let EditBtn = listItem.querySelector(".editIcon")
     deletebtn.innerText="Delete";
     deletebtn.classList.add("delete");
     listItem.appendChild(deletebtn);
+    listItem.removeChild(EditBtn);
     item.remove();
     completeUl.appendChild(listItem);
     CompleteItemsBind(listItem);
