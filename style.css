@@ -131,3 +131,7 @@ li {
   cursor: pointer;
 
 }
+
+.editIcon:hover{
+  color: #0094d8;
+}

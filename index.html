@@ -24,6 +24,7 @@
         <input class="newtask" type="text" id="new-task" />
         <input class="submit-btn" type="submit" id="addTask" value="Add Task" />
       </form>
+      
 
       <div class="task-container">
 
@@ -31,15 +32,15 @@
           <h2>Incomplete Tasks</h2>
           <ul id="items">
             <li class="item">
-              <input type="checkbox" /><label>Task Name</label>
+              <input type="checkbox" /><label>Task One</label>
+              <span class="editIcon" onclick="EditFunction(this)" ><i class="fa-regular fa-pen-to-square"></i></span>
+            </li>
+            <li class="item">
+              <input type="checkbox" /><label>Task Two</label>
               <span class="editIcon"><i class="fa-regular fa-pen-to-square"></i></span>
             </li>
             <li class="item">
-              <input type="checkbox" /><label>Task Name</label>
-              <span class="editIcon"><i class="fa-regular fa-pen-to-square"></i></span>
-            </li>
-            <li class="item">
-              <input type="checkbox" /><label>Task Name</label>
+              <input type="checkbox" /><label>Task Three</label>
               <span class="editIcon"><i class="fa-regular fa-pen-to-square"></i></span>
             </li>
           </ul>

@@ -2,6 +2,7 @@
 let newTask = document.querySelector('#new-task'); //get new task input elemnt
 let form = document.querySelector('form'); //get new task form
 let IncompleteUl = document.querySelector('#items'); //get incomplete UL
+let AllTaskConatiner = document.querySelector('.task-container'); //get incomplete UL
 let completeUl = document.querySelector('.complete-list ul'); // Get complete UL
 
 
@@ -31,6 +32,7 @@ let addtask= function(){
     IncompleteUl.appendChild(listItem);
     newTask.value="";
     InCompleteItemsBind(listItem );
+    SaveData()
 }
 
 
@@ -40,7 +42,8 @@ let InCompleteItemsBind = function(listItem){
     // checkBox.onchange = completeTask;
     // checkBox.addEventListener("change", completeTask);
     checkBox.setAttribute("onchange", "completeTask(this)");
-    EditBtn.onclick = EditFunction;
+    EditBtn.setAttribute("onclick", "EditFunction(this)");
+    // EditBtn.onclick = EditFunction;
 }
 
 let completeTask = function(item){
@@ -55,6 +58,8 @@ let completeTask = function(item){
     item.remove();
     completeUl.appendChild(listItem);
     CompleteItemsBind(listItem);
+    SaveData()
+
 
 }
 
@@ -62,34 +67,41 @@ let completeTask = function(item){
 
 let CompleteItemsBind = function(listItem){
     let deletebtn = listItem.querySelector('.delete')
-    deletebtn.onclick = deleteTask;
+    // deletebtn.onclick = deleteTask;
+    deletebtn.setAttribute("onclick", "deleteTask(this)");
 
 }
 
-let deleteTask = function(){
-    let listItem = this.parentNode;
+let deleteTask = function(item){
+    let listItem = item.parentNode;
     completeUl.removeChild(listItem);
+    SaveData()
+
 }
 
-let EditFunction = function(){
+let EditFunction = function(item){
 
     console.log("edit btn click Clicked");
-    let TaskLabel = this.previousElementSibling;
+    let TaskLabel = item.previousElementSibling;
     let TaskName = prompt("Please enter your Task Name", `${TaskLabel.innerText}`);
 
     if (TaskName.length >= 1) {
    
     TaskLabel.innerHTML= TaskName;
+   
     }
+    SaveData()
 
 }
 
 for(let i=0; i < completeUl.children.length; i++){
     CompleteItemsBind(completeUl.children[i]);
+
 }
 
 for(let i=0; i < IncompleteUl.children.length; i++){
     InCompleteItemsBind(IncompleteUl.children[i]);
+
 }
 
 
@@ -101,9 +113,31 @@ form.addEventListener("submit", ()=>{
         event.preventDefault();
         alert("Add Task")
     }
-    
 
         
 
 });
 
+function SaveData(){
+    localStorage.setItem("SavedData", IncompleteUl.innerHTML );
+    localStorage.setItem("SavedComoleteData", completeUl.innerHTML );
+
+}
+
+function ShowData(){
+    if(localStorage.getItem("SavedData")==null){
+        SaveData()
+    }
+    IncompleteUl.innerHTML=localStorage.getItem("SavedData");
+    completeUl.innerHTML=localStorage.getItem("SavedComoleteData");
+
+
+}
+
+ShowData()
+
+// // SaveData()
+// if(!localStorage.getItem("SavedData")==null){
+//     ShowData()
+
+// }
